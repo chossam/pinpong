@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>특수학급 로봇 탐험대 - 1,2교시 특별 수업</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+        body {
+            font-family: 'Jua', sans-serif;
+            background-color: #f0fdf4;
+        }
+        .bounce-custom {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-5%); }
+            50% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col justify-between">
+
+    <header class="bg-amber-400 shadow-md p-4 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl md:text-3xl text-white drop-shadow-md flex items-center gap-2">
+                🤖 로봇과 함께하는 신나는 1·2교시!
+            </h1>
+            <div class="bg-white px-3 py-1 rounded-full text-amber-600 font-bold shadow text-sm">
+                특수학급 맞춤형 수업
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full p-4 md:p-6 flex-grow flex flex-col gap-6">
+        
+        <!-- Welcome Banner -->
+        <section class="bg-white rounded-3xl p-6 shadow-lg border-4 border-amber-200 flex flex-col md:flex-row items-center gap-6">
+            <div class="text-6xl md:text-8xl bounce-custom">🦊🤖</div>
+            <div class="flex-grow text-center md:text-left">
+                <h2 class="text-2xl md:text-3xl text-emerald-600 mb-2">안녕! 오늘은 로봇의 몸 구성을 알아볼 거야!</h2>
+                <p class="text-lg text-slate-600">
+                    로봇은 어떤 부품들로 움직일까요? <b>제어(뇌), 구동(근육), 센서(감각)</b> 3가지 친구들을 터치하며 재미있게 배워봐요!
+                </p>
+            </div>
+        </section>
+
+        <!-- Navigation Tabs for Activities -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <button onclick="switchTab('parts')" id="tab-parts" class="p-4 rounded-2xl font-bold text-lg shadow transition transform active:scale-95 bg-emerald-500 text-white border-b-4 border-emerald-700">
+                ⚙️ 로봇의 구성요소
+            </button>
+            <button onclick="switchTab('sensor')" id="tab-sensor" class="p-4 rounded-2xl font-bold text-lg shadow transition transform active:scale-95 bg-white text-slate-700 border-2 border-emerald-300">
+                👁️ 센서 체험실
+            </button>
+            <button onclick="switchTab('drive')" id="tab-drive" class="p-4 rounded-2xl font-bold text-lg shadow transition transform active:scale-95 bg-white text-slate-700 border-2 border-emerald-300">
+                🚗 구동(바퀴) 놀이
+            </button>
+            <button onclick="switchTab('quiz')" id="tab-quiz" class="p-4 rounded-2xl font-bold text-lg shadow transition transform active:scale-95 bg-white text-slate-700 border-2 border-emerald-300">
+                ✨ 퀴즈 팡팡!
+            </button>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 shadow-lg border-4 border-emerald-100 flex-grow min-h-[350px]">
+            
+            <!-- Section 1: Robot Parts (Control, Drive, Sensor) -->
+            <div id="content-parts" class="space-y-6">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-emerald-700">로봇의 3가지 핵심 구성요소를 알아봐요!</h3>
+                    <p class="text-slate-500 mt-1">아래 카드들을 터치해서 어떤 일을 하는지 들어보세요.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div onclick="speakPart('제어', '컴퓨터와 AI는 로봇의 뇌예요. 생각하고 명령을 내려요!')" class="bg-sky-50 border-4 border-sky-300 rounded-2xl p-5 text-center cursor-pointer hover:bg-sky-100 transition shadow">
+                        <div class="text-5xl mb-3">🧠</div>
+                        <h4 class="text-xl font-bold text-sky-700">1. 제어 (뇌)</h4>
+                        <p class="text-sm text-slate-600 mt-2">생각하고 명령을 내려요!</p>
+                        <span class="inline-block mt-3 bg-sky-500 text-white px-3 py-1 rounded-full text-xs">소리 듣기 🔊</span>
+                    </div>
+                    <div onclick="speakPart('구동', '모터와 바퀴는 로봇의 팔다리예요. 앞으로 가고 물건을 잡아요!')" class="bg-amber-50 border-4 border-amber-300 rounded-2xl p-5 text-center cursor-pointer hover:bg-amber-100 transition shadow">
+                        <div class="text-5xl mb-3">💪</div>
+                        <h4 class="text-xl font-bold text-amber-700">2. 구동 (근육)</h4>
+                        <p class="text-sm text-slate-600 mt-2">바퀴를 굴리고 움직여요!</p>
+                        <span class="inline-block mt-3 bg-amber-500 text-white px-3 py-1 rounded-full text-xs">소리 듣기 🔊</span>
+                    </div>
+                    <div onclick="speakPart('센서', '센서는 로봇의 눈과 코와 귀예요. 주변을 살펴요!')" class="bg-rose-50 border-4 border-rose-300 rounded-2xl p-5 text-center cursor-pointer hover:bg-rose-100 transition shadow">
+                        <div class="text-5xl mb-3">👀</div>
+                        <h4 class="text-xl font-bold text-rose-700">3. 센서 (감각)</h4>
+                        <p class="text-sm text-slate-600 mt-2">주위 환경을 느껴요!</p>
+                        <span class="inline-block mt-3 bg-rose-500 text-white px-3 py-1 rounded-full text-xs">소리 듣기 🔊</span>
+                    </div>
+                </div>
+                <div id="part-feedback" class="p-4 bg-emerald-50 rounded-2xl text-center text-emerald-800 font-bold hidden text-lg border-2 border-emerald-200">
+                </div>
+            </div>
+
+            <!-- Section 2: Sensor Lab (Interactive Simulator) -->
+            <div id="content-sensor" class="space-y-6 hidden">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-emerald-700">센서 체험실: 장애물을 피해라!</h3>
+                    <p class="text-slate-500 mt-1">로봇 청소기 센서처럼 장애물을 감지해봐요.</p>
+                </div>
+                <div class="bg-slate-900 rounded-2xl p-6 text-white text-center relative overflow-hidden min-h-[200px] flex flex-col justify-center items-center">
+                    <div id="robot-display" class="text-6xl mb-4 transition-all duration-300">🤖 ➡️</div>
+                    <div id="sensor-status" class="text-xl font-bold text-amber-300 mb-4">상태: 안전하게 길을 가는 중...</div>
+                    <div class="flex gap-3">
+                        <button onclick="triggerSensor('clear')" class="bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-xl font-bold text-white shadow">길이 깨끗해요 (안전)</button>
+                        <button onclick="triggerSensor('obstacle')" class="bg-rose-500 hover:bg-rose-600 px-4 py-2 rounded-xl font-bold text-white shadow">장애물 발견! (멈춤)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Drive & Movement Simulator -->
+            <div id="content-drive" class="space-y-6 hidden">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-emerald-700">구동 장치: 오토카 운전하기</h3>
+                    <p class="text-slate-500 mt-1">버튼을 눌러 오토카를 움직여보세요!</p>
+                </div>
+                <div class="flex flex-col items-center gap-4">
+                    <div id="car-stage" class="w-full bg-slate-100 rounded-2xl h-36 flex items-center justify-center border-4 border-dashed border-emerald-300 relative overflow-hidden">
+                        <div id="car-icon" class="text-6xl transition-all duration-500 absolute left-4">🚗</div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 w-full max-w-xs">
+                        <div></div>
+                        <button onclick="moveCar('up')" class="bg-amber-400 hover:bg-amber-500 p-4 rounded-2xl text-2xl shadow font-bold text-white active:scale-95">⬆️</button>
+                        <div></div>
+                        <button onclick="moveCar('left')" class="bg-amber-400 hover:bg-amber-500 p-4 rounded-2xl text-2xl shadow font-bold text-white active:scale-95">⬅️</button>
+                        <button onclick="moveCar('stop')" class="bg-slate-400 hover:bg-slate-500 p-4 rounded-2xl text-xl shadow font-bold text-white active:scale-95">⏹️</button>
+                        <button onclick="moveCar('right')" class="bg-amber-400 hover:bg-amber-500 p-4 rounded-2xl text-2xl shadow font-bold text-white active:scale-95">➡️</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Quiz Game -->
+            <div id="content-quiz" class="space-y-6 hidden">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-emerald-700">재미있는 로봇 퀴즈 팡팡!</h3>
+                    <p class="text-slate-500 mt-1">알맞은 답을 골라보세요.</p>
+                </div>
+                <div id="quiz-box" class="bg-amber-50 p-6 rounded-2xl border-2 border-amber-200 text-center space-y-4">
+                    <h4 id="quiz-question" class="text-xl font-bold text-slate-700">질문 1: 로봇의 '생각하는 뇌' 역할을 하는 것은 무엇일까요?</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="quiz-options">
+                        <button onclick="checkAnswer(true)" class="bg-white border-2 border-emerald-300 p-4 rounded-xl font-bold text-lg hover:bg-emerald-100 shadow transition">🧠 제어 (컴퓨터/AI)</button>
+                        <button onclick="checkAnswer(false)" class="bg-white border-2 border-emerald-300 p-4 rounded-xl font-bold text-lg hover:bg-emerald-100 shadow transition">👀 눈으로 보는 센서</button>
+                    </div>
+                    <div id="quiz-result" class="text-lg font-bold mt-3 hidden"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white py-4 text-center text-sm">
+        <p>💡 특수학급 1~2교시 로봇 교육 웹 애플리케이션 | 함께 배우고 안전하게 실습해요!</p>
+    </footer>
+
+    <script>
+        // Tab Switching Function
+        function switchTab(tabName) {
+            const tabs = ['parts', 'sensor', 'drive', 'quiz'];
+            tabs.forEach(t => {
+                document.getElementById(`content-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).className = "p-4 rounded-2xl font-bold text-lg shadow transition transform active:scale-95 bg-white text-slate-700 border-2 border-emerald-300";
+            });
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).className = "p-4 rounded-2xl font-bold text-lg shadow transition transform active:scale-95 bg-emerald-500 text-white border-b-4 border-emerald-700";
+        }
+
+        // Speech and Feedback for Robot Parts
+        function speakPart(partName, desc) {
+            const feedback = document.getElementById('part-feedback');
+            feedback.classList.remove('hidden');
+            feedback.innerHTML = `✨ <b>[${partName}]</b>: ${desc}`;
+            
+            // Web Speech API for TTS
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(desc);
+                utterance.lang = 'ko-KR';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Sensor Simulator
+        function triggerSensor(state) {
+            const display = document.getElementById('robot-display');
+            const status = document.getElementById('sensor-status');
+            if (state === 'clear') {
+                display.innerText = "🤖 ➡️🚀";
+                status.innerText = "상태: 장애물이 없어요! 앞으로 쌩쌩 달려요!";
+                status.className = "text-xl font-bold text-emerald-300 mb-4";
+            } else {
+                display.innerText = "🤖 🛑";
+                status.innerText = "상태: 장애물 발견! 센서가 울리고 멈췄어요!";
+                status.className = "text-xl font-bold text-rose-300 mb-4";
+            }
+        }
+
+        // Car Movement Simulator
+        let carPosition = 20;
+        function moveCar(direction) {
+            const car = document.getElementById('car-icon');
+            if (direction === 'up' || direction === 'right') {
+                carPosition = Math.min(carPosition + 40, 300);
+                car.style.left = carPosition + 'px';
